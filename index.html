@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Demostración pública de solo lectura de Kinea Gestión." />
+    <title>Kinea Gestión | Demostración</title>
+    <style>
+      :root { color-scheme: light; --ink:#16312a; --muted:#5d746b; --green:#14745f; --soft:#f7f8f5; --line:#d9e2dc; --card:#fff; }
+      * { box-sizing: border-box; }
+      body { margin:0; background:var(--soft); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .wrap { max-width:1120px; margin:0 auto; padding:0 28px; }
+      header { background:#fff; border-bottom:1px solid var(--line); }
+      .bar { min-height:82px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+      .brand { display:flex; align-items:center; gap:12px; font-weight:800; }
+      .mark { display:grid; place-items:center; width:42px; height:42px; border-radius:16px; background:#e4eee8; color:#126451; font-size:13px; font-weight:900; }
+      .brand small { display:block; margin-top:2px; color:#587269; letter-spacing:.13em; font-size:10px; }
+      .pill { border:1px solid #b9d8c8; background:#eef8f1; color:#176448; border-radius:999px; padding:9px 14px; font-size:12px; font-weight:800; }
+      .hero { display:grid; grid-template-columns:1.1fr .9fr; gap:72px; padding:72px 0; align-items:center; }
+      .eyebrow { color:#287762; font-size:13px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
+      h1 { max-width:650px; font-size:53px; line-height:1.03; letter-spacing:-.06em; margin:14px 0 20px; }
+      h2 { font-size:33px; letter-spacing:-.045em; margin:8px 0 0; }
+      h3 { margin:15px 0 7px; font-size:18px; }
+      p { color:var(--muted); line-height:1.65; }
+      .lead { max-width:620px; font-size:18px; line-height:1.7; }
+      .buttons { display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
+      .button { display:inline-block; padding:13px 19px; background:var(--green); color:#fff; border-radius:13px; font-weight:800; text-decoration:none; }
+      .button.alt { background:#fff; border:1px solid #bdd1c7; color:#1b5042; }
+      .notice { display:flex; gap:12px; margin-top:30px; padding:16px; border:1px solid #e4c98f; border-radius:16px; background:#fff8e9; color:#70501b; font-size:14px; line-height:1.55; }
+      .notice p { color:#70501b; margin:0; }
+      .agenda { background:#fff; border:1px solid #d4e1da; border-radius:30px; padding:26px; box-shadow:0 24px 60px -36px rgba(25,74,60,.5); }
+      .agenda-head { display:flex; align-items:flex-start; justify-content:space-between; padding-bottom:18px; border-bottom:1px solid #e7ede9; }
+      .agenda-head h2 { font-size:21px; margin-top:5px; }
+      .calendar { font-size:27px; color:#157561; }
+      .row { display:grid; grid-template-columns:58px 1fr; gap:13px; padding:17px 0; border-bottom:1px solid #e7ede9; }
+      .row:last-child { border:0; }
+      .time { font-weight:900; color:#1a755f; font-size:14px; }
+      .row-top { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; }
+      .row b { font-size:15px; }
+      .status { border-radius:999px; background:#e8f6ed; color:#18704f; padding:5px 9px; font-size:11px; font-weight:800; }
+      .row p { margin:4px 0 0; font-size:14px; }
+      .modules { border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:#fff; padding:60px 0; }
+      .grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; margin-top:32px; }
+      .module { border:1px solid #dce7e1; border-radius:18px; padding:21px; background:#fcfdfb; }
+      .icon { color:#19745f; font-size:25px; }
+      footer { padding:28px 0; font-size:14px; color:#5c736a; }
+      @media (max-width:800px) { .wrap { padding:0 20px; } .hero { grid-template-columns:1fr; gap:38px; padding:48px 0; } h1 { font-size:42px; } .grid { grid-template-columns:1fr; } .bar { min-height:72px; } .pill { font-size:10px; padding:8px 10px; } }
+    </style>
+  </head>
+  <body>
+    <header><div class="wrap bar"><div class="brand"><span class="mark">KP</span><span>Kinea Podología<small>GESTIÓN CLÍNICA</small></span></div><span class="pill">Demostración de solo lectura</span></div></header>
+    <main>
+      <section class="wrap hero">
+        <div>
+          <div class="eyebrow">Una operativa clínica conectada</div>
+          <h1>Kinea Gestión, pensada para que el día esté bajo control.</h1>
+          <p class="lead">Una visión segura de la agenda, los pacientes, la facturación y el seguimiento operativo de un centro de podología y fisioterapia.</p>
+          <div class="buttons"><a class="button" href="#modulos">Conocer módulos</a><a class="button alt" href="https://kinea.duquecreative.com">Ver web de Kinea</a></div>
+          <div class="notice"><span aria-hidden="true">🔒</span><p><strong>Entorno de demostración.</strong> Esta página usa datos ficticios, no muestra historias clínicas ni permite realizar cambios. El entorno clínico real solo está disponible para el equipo autorizado.</p></div>
+        </div>
+        <section class="agenda" aria-label="Agenda de demostración"><div class="agenda-head"><div><div class="eyebrow" style="font-size:11px">Agenda de demostración</div><h2>Martes, 18 de agosto</h2></div><span class="calendar" aria-hidden="true">▣</span></div>
+          <div class="row"><span class="time">09:00</span><div><div class="row-top"><b>Paciente demo 01</b><span class="status">Confirmada</span></div><p>Podología clínica · Datos ficticios</p></div></div>
+          <div class="row"><span class="time">10:30</span><div><div class="row-top"><b>Paciente demo 02</b><span class="status">En consulta</span></div><p>Fisioterapia · Datos ficticios</p></div></div>
+          <div class="row"><span class="time">12:00</span><div><div class="row-top"><b>Paciente demo 03</b><span class="status">Programada</span></div><p>Análisis de pisada · Datos ficticios</p></div></div>
+        </section>
+      </section>
+      <section class="modules" id="modulos"><div class="wrap"><div class="eyebrow">Módulos preparados</div><h2>Una única herramienta para el equipo y la dirección.</h2><div class="grid">
+        <article class="module"><div class="icon">◫</div><h3>Agenda y salas</h3><p>Citas, estados, profesionales y salas de atención en una única vista.</p></article>
+        <article class="module"><div class="icon">♙</div><h3>Pacientes</h3><p>Fichas administrativas y acceso controlado a los datos clínicos.</p></article>
+        <article class="module"><div class="icon">▤</div><h3>Historia clínica</h3><p>Evoluciones y dictado revisable disponibles solo en el entorno interno.</p></article>
+        <article class="module"><div class="icon">▧</div><h3>Facturación</h3><p>Borradores desde citas completadas, IGIC exento y Facturae validable.</p></article>
+        <article class="module"><div class="icon">▦</div><h3>Inventario</h3><p>Consumibles, existencias y alertas operativas para recepción y dirección.</p></article>
+      </div></div></section>
+    </main>
+    <footer class="wrap">Kinea Podología · Demostración operativa · Datos simulados · Solo lectura</footer>
+  </body>
+</html>
