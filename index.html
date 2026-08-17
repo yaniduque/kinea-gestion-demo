@@ -3,75 +3,185 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Demostración pública de solo lectura de Kinea Gestión." />
+    <meta name="description" content="Demostración pública e interactiva de Kinea Gestión con datos ficticios temporales." />
     <title>Kinea Gestión | Demostración</title>
     <style>
-      :root { color-scheme: light; --ink:#16312a; --muted:#5d746b; --green:#14745f; --soft:#f7f8f5; --line:#d9e2dc; --card:#fff; }
-      * { box-sizing: border-box; }
-      body { margin:0; background:var(--soft); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-      .wrap { max-width:1120px; margin:0 auto; padding:0 28px; }
-      header { background:#fff; border-bottom:1px solid var(--line); }
-      .bar { min-height:82px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
-      .brand { display:flex; align-items:center; gap:12px; font-weight:800; }
-      .mark { display:grid; place-items:center; width:42px; height:42px; border-radius:16px; background:#e4eee8; color:#126451; font-size:13px; font-weight:900; }
-      .brand small { display:block; margin-top:2px; color:#587269; letter-spacing:.13em; font-size:10px; }
-      .pill { border:1px solid #b9d8c8; background:#eef8f1; color:#176448; border-radius:999px; padding:9px 14px; font-size:12px; font-weight:800; }
-      .hero { display:grid; grid-template-columns:1.1fr .9fr; gap:72px; padding:72px 0; align-items:center; }
-      .eyebrow { color:#287762; font-size:13px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
-      h1 { max-width:650px; font-size:53px; line-height:1.03; letter-spacing:-.06em; margin:14px 0 20px; }
-      h2 { font-size:33px; letter-spacing:-.045em; margin:8px 0 0; }
-      h3 { margin:15px 0 7px; font-size:18px; }
-      p { color:var(--muted); line-height:1.65; }
-      .lead { max-width:620px; font-size:18px; line-height:1.7; }
-      .buttons { display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
-      .button { display:inline-block; padding:13px 19px; background:var(--green); color:#fff; border-radius:13px; font-weight:800; text-decoration:none; }
+      :root { --ink:#16312a; --muted:#5d746b; --green:#14745f; --green-dark:#0d5848; --mint:#eaf4ee; --soft:#f7f8f5; --line:#d9e2dc; --card:#fff; --amber:#fff8e9; }
+      * { box-sizing:border-box; }
+      body { margin:0; background:var(--soft); color:var(--ink); font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+      button,input,select { font:inherit; }
+      .wrap { max-width:1160px; margin:0 auto; padding:0 28px; }
+      header { position:sticky; top:0; z-index:5; background:rgba(255,255,255,.95); border-bottom:1px solid var(--line); backdrop-filter:blur(12px); }
+      .bar { min-height:78px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+      .brand { display:flex; align-items:center; gap:12px; font-weight:850; letter-spacing:-.035em; }
+      .mark { display:grid; place-items:center; width:42px; height:42px; border-radius:15px; background:#e4eee8; color:#126451; font-size:13px; font-weight:900; }
+      .brand small { display:block; margin-top:3px; color:#587269; letter-spacing:.12em; font-size:10px; }
+      .nav { display:flex; gap:4px; overflow:auto; padding:4px; }
+      .nav button { appearance:none; border:0; background:transparent; color:#557066; border-radius:10px; padding:9px 11px; cursor:pointer; font-size:13px; font-weight:750; white-space:nowrap; }
+      .nav button:hover,.nav button[aria-current="page"] { background:var(--mint); color:var(--green-dark); }
+      .pill { border:1px solid #b9d8c8; background:#eef8f1; color:#176448; border-radius:999px; padding:8px 12px; font-size:11px; font-weight:800; white-space:nowrap; }
+      main { padding:38px 0 60px; }
+      .view[hidden] { display:none; }
+      .eyebrow { color:#287762; font-size:12px; font-weight:850; letter-spacing:.15em; text-transform:uppercase; }
+      h1 { max-width:720px; font-size:54px; line-height:1.02; letter-spacing:-.065em; margin:14px 0 19px; }
+      h2 { font-size:31px; line-height:1.05; letter-spacing:-.045em; margin:7px 0 12px; }
+      h3 { margin:0; font-size:17px; letter-spacing:-.02em; }
+      p { color:var(--muted); line-height:1.62; }
+      .lead { max-width:650px; font-size:18px; line-height:1.7; }
+      .hero { display:grid; grid-template-columns:1.02fr .98fr; gap:54px; align-items:center; padding:42px 0 26px; }
+      .buttons { display:flex; flex-wrap:wrap; gap:11px; margin-top:25px; }
+      .button { appearance:none; border:0; padding:12px 18px; background:var(--green); color:#fff; border-radius:12px; font-weight:800; cursor:pointer; }
+      .button:hover { background:var(--green-dark); }
       .button.alt { background:#fff; border:1px solid #bdd1c7; color:#1b5042; }
-      .notice { display:flex; gap:12px; margin-top:30px; padding:16px; border:1px solid #e4c98f; border-radius:16px; background:#fff8e9; color:#70501b; font-size:14px; line-height:1.55; }
+      .notice { display:flex; gap:12px; margin:27px 0 0; padding:15px 16px; border:1px solid #e4c98f; border-radius:16px; background:var(--amber); color:#70501b; font-size:13px; line-height:1.55; }
       .notice p { color:#70501b; margin:0; }
-      .agenda { background:#fff; border:1px solid #d4e1da; border-radius:30px; padding:26px; box-shadow:0 24px 60px -36px rgba(25,74,60,.5); }
-      .agenda-head { display:flex; align-items:flex-start; justify-content:space-between; padding-bottom:18px; border-bottom:1px solid #e7ede9; }
-      .agenda-head h2 { font-size:21px; margin-top:5px; }
+      .mini-dashboard,.surface { background:#fff; border:1px solid #d4e1da; border-radius:26px; padding:25px; box-shadow:0 24px 60px -40px rgba(25,74,60,.55); }
+      .mini-head,.surface-head { display:flex; gap:16px; justify-content:space-between; align-items:flex-start; padding-bottom:17px; border-bottom:1px solid #e7ede9; }
+      .mini-head h2 { font-size:20px; margin:5px 0 0; }
       .calendar { font-size:27px; color:#157561; }
-      .row { display:grid; grid-template-columns:58px 1fr; gap:13px; padding:17px 0; border-bottom:1px solid #e7ede9; }
+      .row { display:grid; grid-template-columns:58px 1fr; gap:13px; padding:16px 0; border-bottom:1px solid #e7ede9; }
       .row:last-child { border:0; }
       .time { font-weight:900; color:#1a755f; font-size:14px; }
       .row-top { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; }
       .row b { font-size:15px; }
       .status { border-radius:999px; background:#e8f6ed; color:#18704f; padding:5px 9px; font-size:11px; font-weight:800; }
       .row p { margin:4px 0 0; font-size:14px; }
-      .modules { border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:#fff; padding:60px 0; }
-      .grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; margin-top:32px; }
-      .module { border:1px solid #dce7e1; border-radius:18px; padding:21px; background:#fcfdfb; }
-      .icon { color:#19745f; font-size:25px; }
-      footer { padding:28px 0; font-size:14px; color:#5c736a; }
-      @media (max-width:800px) { .wrap { padding:0 20px; } .hero { grid-template-columns:1fr; gap:38px; padding:48px 0; } h1 { font-size:42px; } .grid { grid-template-columns:1fr; } .bar { min-height:72px; } .pill { font-size:10px; padding:8px 10px; } }
+      .metric-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:13px; margin-top:14px; }
+      .metric { padding:16px; border-radius:16px; background:#f7faf7; border:1px solid #e5eee9; }
+      .metric b { display:block; font-size:28px; letter-spacing:-.05em; }
+      .metric span { color:#5e756b; font-size:12px; }
+      .module-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:34px; }
+      .module { text-align:left; appearance:none; width:100%; border:1px solid #dce7e1; border-radius:18px; padding:20px; background:#fcfdfb; cursor:pointer; transition:transform .16s ease, border-color .16s ease; }
+      .module:hover { transform:translateY(-2px); border-color:#91c5b0; }
+      .icon { color:#19745f; font-size:24px; margin-bottom:14px; }
+      .module p { margin:8px 0 0; font-size:13px; }
+      .page-title { margin-bottom:26px; }
+      .page-title p { max-width:650px; margin:0; }
+      .two-col { display:grid; grid-template-columns:1.15fr .85fr; gap:20px; }
+      .table { width:100%; border-collapse:collapse; margin-top:8px; }
+      .table th,.table td { padding:13px 8px; text-align:left; border-bottom:1px solid #e7ede9; font-size:14px; }
+      .table th { color:#6b8177; text-transform:uppercase; font-size:10px; letter-spacing:.1em; }
+      .muted { color:var(--muted); }
+      form { display:grid; gap:12px; margin-top:18px; }
+      label { display:grid; gap:6px; color:#34594f; font-size:13px; font-weight:750; }
+      input,select { width:100%; border:1px solid #cddbd4; background:#fff; border-radius:10px; padding:11px 12px; color:var(--ink); }
+      input:focus,select:focus { outline:3px solid rgba(20,116,95,.18); border-color:#26846e; }
+      .helper { margin:14px 0 0; padding:12px; border-radius:12px; background:#f5f8f6; color:#557066; font-size:12px; line-height:1.5; }
+      .inline-message { min-height:20px; color:#176448; font-size:13px; font-weight:700; }
+      .empty { padding:22px 0 5px; color:#6a8177; font-size:14px; }
+      footer { padding:28px 0 40px; font-size:13px; color:#5c736a; }
+      @media (max-width:900px) { .wrap { padding:0 20px; } .bar { align-items:flex-start; flex-wrap:wrap; padding:12px 0; } .nav { order:3; width:100%; } .hero,.two-col { grid-template-columns:1fr; gap:28px; } .module-grid { grid-template-columns:repeat(2,1fr); } h1 { font-size:43px; } }
+      @media (max-width:560px) { .pill { display:none; } .module-grid,.metric-grid { grid-template-columns:1fr; } .surface,.mini-dashboard { padding:19px; border-radius:20px; } h1 { font-size:37px; } .table th:nth-child(3),.table td:nth-child(3) { display:none; } }
     </style>
   </head>
   <body>
-    <header><div class="wrap bar"><div class="brand"><span class="mark">KP</span><span>Kinea Podología<small>GESTIÓN CLÍNICA</small></span></div><span class="pill">Demostración de solo lectura</span></div></header>
-    <main>
-      <section class="wrap hero">
-        <div>
-          <div class="eyebrow">Una operativa clínica conectada</div>
-          <h1>Kinea Gestión, pensada para que el día esté bajo control.</h1>
-          <p class="lead">Una visión segura de la agenda, los pacientes, la facturación y el seguimiento operativo de un centro de podología y fisioterapia.</p>
-          <div class="buttons"><a class="button" href="#modulos">Conocer módulos</a><a class="button alt" href="#agenda-demo">Ver agenda demo</a></div>
-          <div class="notice"><span aria-hidden="true">🔒</span><p><strong>Entorno de demostración.</strong> Esta página usa datos ficticios, no muestra historias clínicas ni permite realizar cambios. El entorno clínico real solo está disponible para el equipo autorizado.</p></div>
+    <header>
+      <div class="wrap bar">
+        <div class="brand"><span class="mark">KP</span><span>Kinea Podología<small>GESTIÓN CLÍNICA · DEMO</small></span></div>
+        <nav class="nav" aria-label="Módulos de demostración">
+          <button data-view="inicio" aria-current="page">Inicio</button>
+          <button data-view="agenda">Agenda</button>
+          <button data-view="pacientes">Pacientes</button>
+          <button data-view="facturacion">Facturación</button>
+        </nav>
+        <span class="pill">Datos ficticios · sesión temporal</span>
+      </div>
+    </header>
+    <main class="wrap">
+      <section class="view" id="inicio">
+        <div class="hero">
+          <div>
+            <div class="eyebrow">Una operativa clínica conectada</div>
+            <h1>Kinea Gestión, pensada para que el día esté bajo control.</h1>
+            <p class="lead">Recorre una versión ficticia de la agenda, los pacientes y la facturación de un centro de podología y fisioterapia.</p>
+            <div class="buttons"><button class="button" data-view="agenda">Abrir agenda demo</button><button class="button alt" data-view="pacientes">Crear paciente ficticio</button></div>
+            <div class="notice"><span aria-hidden="true">🔒</span><p><strong>Entorno de demostración.</strong> Todo lo que escribas aquí es ficticio, se conserva solo mientras esta pestaña está abierta y se borra al recargar. No hay acceso a historias clínicas, autenticación ni base de datos.</p></div>
+          </div>
+          <section class="mini-dashboard" aria-label="Resumen de demostración">
+            <div class="mini-head"><div><div class="eyebrow" style="font-size:10px">Vista operativa</div><h2>Martes, 18 de agosto</h2></div><span class="calendar" aria-hidden="true">▣</span></div>
+            <div class="metric-grid"><div class="metric"><b id="metric-appointments">3</b><span>Citas ficticias</span></div><div class="metric"><b id="metric-patients">3</b><span>Pacientes demo</span></div><div class="metric"><b>0</b><span>Importe real</span></div><div class="metric"><b>0</b><span>Datos clínicos</span></div></div>
+          </section>
         </div>
-        <section id="agenda-demo" class="agenda" aria-label="Agenda de demostración"><div class="agenda-head"><div><div class="eyebrow" style="font-size:11px">Agenda de demostración</div><h2>Martes, 18 de agosto</h2></div><span class="calendar" aria-hidden="true">▣</span></div>
-          <div class="row"><span class="time">09:00</span><div><div class="row-top"><b>Paciente demo 01</b><span class="status">Confirmada</span></div><p>Podología clínica · Datos ficticios</p></div></div>
-          <div class="row"><span class="time">10:30</span><div><div class="row-top"><b>Paciente demo 02</b><span class="status">En consulta</span></div><p>Fisioterapia · Datos ficticios</p></div></div>
-          <div class="row"><span class="time">12:00</span><div><div class="row-top"><b>Paciente demo 03</b><span class="status">Programada</span></div><p>Análisis de pisada · Datos ficticios</p></div></div>
-        </section>
+        <section><div class="eyebrow">Módulos navegables</div><h2>Explora el recorrido de la demostración.</h2><div class="module-grid">
+          <button class="module" data-view="agenda"><div class="icon">◫</div><h3>Agenda y salas</h3><p>Consulta y añade citas ficticias en la agenda demo.</p></button>
+          <button class="module" data-view="pacientes"><div class="icon">♙</div><h3>Pacientes</h3><p>Crea fichas demo que se eliminan al recargar.</p></button>
+          <button class="module" data-view="facturacion"><div class="icon">▧</div><h3>Facturación</h3><p>Genera borradores ficticios sin validez fiscal.</p></button>
+          <button class="module" data-view="agenda"><div class="icon">▦</div><h3>Inventario</h3><p>Incluido en la aplicación interna protegida.</p></button>
+        </div></section>
       </section>
-      <section class="modules" id="modulos"><div class="wrap"><div class="eyebrow">Módulos preparados</div><h2>Una única herramienta para el equipo y la dirección.</h2><div class="grid">
-        <article class="module"><div class="icon">◫</div><h3>Agenda y salas</h3><p>Citas, estados, profesionales y salas de atención en una única vista.</p></article>
-        <article class="module"><div class="icon">♙</div><h3>Pacientes</h3><p>Fichas administrativas y acceso controlado a los datos clínicos.</p></article>
-        <article class="module"><div class="icon">▤</div><h3>Historia clínica</h3><p>Evoluciones y dictado revisable disponibles solo en el entorno interno.</p></article>
-        <article class="module"><div class="icon">▧</div><h3>Facturación</h3><p>Borradores desde citas completadas, IGIC exento y Facturae validable.</p></article>
-        <article class="module"><div class="icon">▦</div><h3>Inventario</h3><p>Consumibles, existencias y alertas operativas para recepción y dirección.</p></article>
-      </div></div></section>
+
+      <section class="view" id="agenda" hidden>
+        <div class="page-title"><div class="eyebrow">Agenda · datos ficticios</div><h2>Agenda de demostración</h2><p>Las citas que añadas en esta pantalla viven únicamente en la memoria de este navegador.</p></div>
+        <div class="two-col"><section class="surface"><div class="surface-head"><div><div class="eyebrow" style="font-size:10px">Sala 1 · demostración</div><h2>Martes, 18 de agosto</h2></div><span class="calendar">▣</span></div><div id="appointment-list"></div></section>
+          <aside class="surface"><div class="eyebrow">Nueva cita ficticia</div><h3 style="margin-top:8px">Añadir a la agenda</h3><form id="appointment-form"><label>Nombre ficticio<input id="appointment-name" required placeholder="Ej. Paciente demo" /></label><label>Hora<select id="appointment-time"><option>09:00</option><option>10:30</option><option>12:00</option><option>16:00</option></select></label><label>Servicio<select id="appointment-service"><option>Podología clínica</option><option>Fisioterapia</option><option>Análisis de pisada</option></select></label><button class="button" type="submit">Guardar solo en esta demo</button></form><p class="inline-message" id="appointment-message" aria-live="polite"></p><p class="helper">No se crea ninguna cita real. Al actualizar la página se eliminan las citas añadidas.</p></aside>
+        </div>
+      </section>
+
+      <section class="view" id="pacientes" hidden>
+        <div class="page-title"><div class="eyebrow">Pacientes · datos ficticios</div><h2>Pacientes de demostración</h2><p>Esta ficha no pide DNI, no muestra historia clínica y no se envía fuera de tu navegador.</p></div>
+        <div class="two-col"><section class="surface"><div class="surface-head"><div><div class="eyebrow" style="font-size:10px">Listado temporal</div><h2>Fichas demo</h2></div><span class="status">Sin datos reales</span></div><table class="table"><thead><tr><th>Paciente</th><th>Teléfono demo</th><th>Última visita</th></tr></thead><tbody id="patient-list"></tbody></table><p id="patient-empty" class="empty" hidden>Aún no hay más pacientes ficticios.</p></section>
+          <aside class="surface"><div class="eyebrow">Alta ficticia</div><h3 style="margin-top:8px">Crear paciente demo</h3><form id="patient-form"><label>Nombre ficticio<input id="patient-name" required placeholder="Ej. Alex Demo" /></label><label>Teléfono de ejemplo<input id="patient-phone" required inputmode="tel" placeholder="600 000 000" /></label><button class="button" type="submit">Añadir solo a la demo</button></form><p class="inline-message" id="patient-message" aria-live="polite"></p><p class="helper">No uses nombres ni teléfonos reales. Todo el contenido se borra al recargar.</p></aside>
+        </div>
+      </section>
+
+      <section class="view" id="facturacion" hidden>
+        <div class="page-title"><div class="eyebrow">Facturación · simulación</div><h2>Borradores de demostración</h2><p>Explora el recorrido de un borrador sin crear factura, cobro, archivo Facturae ni comunicación real.</p></div>
+        <div class="two-col"><section class="surface"><div class="surface-head"><div><div class="eyebrow" style="font-size:10px">Borradores temporales</div><h2>Facturación demo</h2></div><span class="status">IGIC exento · ficticio</span></div><table class="table"><thead><tr><th>Número demo</th><th>Paciente ficticio</th><th>Importe</th></tr></thead><tbody id="invoice-list"></tbody></table><p id="invoice-empty" class="empty">Aún no has creado ningún borrador de demostración.</p></section>
+          <aside class="surface"><div class="eyebrow">Acción demostrativa</div><h3 style="margin-top:8px">Crear borrador ficticio</h3><form id="invoice-form"><label>Paciente de ejemplo<select id="invoice-patient"></select></label><label>Importe demo (€)<input id="invoice-amount" required type="number" min="1" step="0.01" value="45" /></label><button class="button" type="submit">Generar borrador ficticio</button></form><p class="inline-message" id="invoice-message" aria-live="polite"></p><p class="helper">No se genera una factura legal, no hay cobro ni descarga y todo desaparece al recargar.</p></aside>
+        </div>
+      </section>
     </main>
-    <footer class="wrap">Kinea Podología · Demostración operativa · Datos simulados · Solo lectura</footer>
+    <footer class="wrap">Kinea Podología · Demostración interactiva · Datos simulados temporales · No utilizar información real de pacientes</footer>
+    <script>
+      const state = {
+        patients: [
+          { name: "Paciente demo 01", phone: "600 000 001", visit: "18 ago. · Demo" },
+          { name: "Paciente demo 02", phone: "600 000 002", visit: "18 ago. · Demo" },
+          { name: "Paciente demo 03", phone: "600 000 003", visit: "18 ago. · Demo" }
+        ],
+        appointments: [
+          { time: "09:00", name: "Paciente demo 01", service: "Podología clínica", status: "Confirmada" },
+          { time: "10:30", name: "Paciente demo 02", service: "Fisioterapia", status: "En consulta" },
+          { time: "12:00", name: "Paciente demo 03", service: "Análisis de pisada", status: "Programada" }
+        ],
+        invoices: []
+      };
+      const views = [...document.querySelectorAll(".view")];
+      const navigation = [...document.querySelectorAll("[data-view]")];
+      const showView = view => {
+        views.forEach(section => { section.hidden = section.id !== view; });
+        navigation.forEach(button => button.setAttribute("aria-current", button.dataset.view === view ? "page" : "false"));
+        history.replaceState(null, "", `#${view}`);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      };
+      navigation.forEach(button => button.addEventListener("click", () => showView(button.dataset.view)));
+      const render = () => {
+        document.querySelector("#metric-appointments").textContent = state.appointments.length;
+        document.querySelector("#metric-patients").textContent = state.patients.length;
+        document.querySelector("#appointment-list").innerHTML = "";
+        [...state.appointments].sort((a,b) => a.time.localeCompare(b.time)).forEach(appointment => {
+          const row = document.createElement("div"); row.className = "row";
+          const time = document.createElement("span"); time.className = "time"; time.textContent = appointment.time;
+          const details = document.createElement("div"); const top = document.createElement("div"); top.className = "row-top";
+          const name = document.createElement("b"); name.textContent = appointment.name;
+          const status = document.createElement("span"); status.className = "status"; status.textContent = appointment.status;
+          const text = document.createElement("p"); text.textContent = `${appointment.service} · Datos ficticios`;
+          top.append(name, status); details.append(top, text); row.append(time, details); document.querySelector("#appointment-list").append(row);
+        });
+        const patients = document.querySelector("#patient-list"); patients.innerHTML = "";
+        state.patients.forEach(patient => { const row = document.createElement("tr"); [patient.name, patient.phone, patient.visit].forEach(value => { const cell = document.createElement("td"); cell.textContent = value; row.append(cell); }); patients.append(row); });
+        document.querySelector("#patient-empty").hidden = state.patients.length > 0;
+        const select = document.querySelector("#invoice-patient"); select.innerHTML = "";
+        state.patients.forEach(patient => { const option = document.createElement("option"); option.value = patient.name; option.textContent = patient.name; select.append(option); });
+        const invoices = document.querySelector("#invoice-list"); invoices.innerHTML = "";
+        state.invoices.forEach(invoice => { const row = document.createElement("tr"); [invoice.number, invoice.patient, `${invoice.amount.toFixed(2)} €`].forEach(value => { const cell = document.createElement("td"); cell.textContent = value; row.append(cell); }); invoices.append(row); });
+        document.querySelector("#invoice-empty").hidden = state.invoices.length > 0;
+      };
+      document.querySelector("#patient-form").addEventListener("submit", event => { event.preventDefault(); const name = document.querySelector("#patient-name").value.trim(); const phone = document.querySelector("#patient-phone").value.trim(); state.patients.push({ name, phone, visit: "Ahora · Demo" }); event.currentTarget.reset(); document.querySelector("#patient-message").textContent = "Paciente ficticio añadido solo a esta pestaña."; render(); });
+      document.querySelector("#appointment-form").addEventListener("submit", event => { event.preventDefault(); const name = document.querySelector("#appointment-name").value.trim(); const time = document.querySelector("#appointment-time").value; const service = document.querySelector("#appointment-service").value; state.appointments.push({ name, time, service, status: "Programada" }); event.currentTarget.reset(); document.querySelector("#appointment-message").textContent = "Cita ficticia añadida solo a esta pestaña."; render(); });
+      document.querySelector("#invoice-form").addEventListener("submit", event => { event.preventDefault(); const patient = document.querySelector("#invoice-patient").value; const amount = Number(document.querySelector("#invoice-amount").value); state.invoices.push({ number: `DEMO-${String(state.invoices.length + 1).padStart(3, "0")}`, patient, amount }); document.querySelector("#invoice-message").textContent = "Borrador ficticio creado; no genera factura ni cobro."; render(); });
+      render();
+      const requested = location.hash.slice(1); if (["inicio", "agenda", "pacientes", "facturacion"].includes(requested)) showView(requested);
+    </script>
   </body>
 </html>
